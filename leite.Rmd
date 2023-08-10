@@ -47,10 +47,15 @@ leite <- leite_temp |>
     ) |>
     dplyr::mutate(
         code_state = as.double(code_state),
-            date = lubridate::ymd(date),
-               valor = as.double(valor)
+            #date = as.double(date),
+                date = lubridate::as_date(date),
+                    valor = as.double(valor)
     ) |>
     dplyr::glimpse()
 leite |>
     tibble::view()
+```
+
+```{r}
+x <- lubridate::ymd(199701)
 ```
