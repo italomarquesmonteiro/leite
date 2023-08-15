@@ -81,8 +81,10 @@ theme_swd_line <-   theme(
 Preço médio do período 
 ```{r}
 temp |>
-    dplyr::filter(estado == "BRASIL") |>
-    dplyr::arrange(desc(preco_medio)) #|> view()
+    dplyr::filter(estado == "BRASIL" & ano == 2023) |>
+    dplyr::arrange(desc(preco_medio)) |> 
+    ggplot2::ggplot(aes(x = date, y = preco_medio, color = estado)) +
+                geom_line(color = "steelblue")
 ```
 
 
@@ -93,7 +95,7 @@ preco_leite <- temp |>
                 geom_line(color = "steelblue") +
                 geom_hline(yintercept = 1.13, lty = 3, color = "gray30") +
                 theme_swd_line +
-                labs(title = "Preço do leite no Brasil (R$/litro)",
+                labs(title = "Preço médio do leite no Brasil (R$/litro)",
                     subtitle = "# Série histórica
                     by Ítalo Monteiro
                     Source: CEPEA/ESALQ(2023)",
@@ -101,18 +103,18 @@ preco_leite <- temp |>
                 guides(fill = FALSE) +
                 scale_x_date(date_labels = "%m/%Y", date_breaks = "6 month") +
                 theme(axis.text.x = element_text(angle = 60)) +
-                annotate("text", label = "Média do período - R$ 1,13",
+                annotate("text", label = "Média paga no período - R$ 1,13",
                     x = as.Date(
                         "2005-08-01"), y = 1.2, size = 4, colour = "gray60") +
-                annotate("text", label = "R$ 3,57 / jul-2022",
+                annotate("text", label = "R$ 3,57",
                     x = as.Date(
-                        "2022-07-01"), y = 3.65, size = 4, colour = "#E46726") +
-                annotate("text", label = "R$ 2,56 / jun-2023",
+                        "2022-07-01"), y = 3.65, size = 4, colour = "gray50") +
+                annotate("text", label = "R$ 2,56",
                     x = as.Date(
-                        "2023-12-01"), y = 2.54, size = 4, colour = "gray30") +
-                annotate("text", label = "R$ 2,90 / abr-2023",
+                        "2023-12-01"), y = 2.54, size = 4, colour = "steelblue") +
+                annotate("text", label = "R$ 2,90",
                     x = as.Date(
-                        "2023-12-01"), y = 2.95, size = 4, colour = "steelblue")
+                        "2023-12-01"), y = 2.95, size = 4, colour = "gray50")
 preco_leite
 ```
 
