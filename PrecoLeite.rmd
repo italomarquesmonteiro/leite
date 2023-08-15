@@ -80,11 +80,34 @@ theme_swd_line <-   theme(
 
 Preço médio do período 
 ```{r}
-temp |>
+graph <- temp |>
     dplyr::filter(estado == "BRASIL" & ano == 2023) |>
-    dplyr::arrange(desc(preco_medio)) |> 
+    #dplyr::arrange(desc(preco_medio)) |>
     ggplot2::ggplot(aes(x = date, y = preco_medio, color = estado)) +
-                geom_line(color = "steelblue")
+                geom_line(color = "steelblue") +
+                geom_hline(yintercept = 2.73, lty = 3, color = "gray30") +
+                geom_text(
+                    mapping = aes(label = paste0(
+                        "R$", preco_medio)), color = "gray30") +
+                theme_swd_line +
+                labs(title = "Preço médio do leite no Brasil (R$/litro)",
+                    subtitle = "# Ano: 2023
+                    by Ítalo Monteiro
+                    Source: CEPEA/ESALQ(2023)",
+                    x = "Período [mês]") +
+                annotate("text", label = "Média paga R$ 2,73",
+                    x = as.Date(
+                        "2023-01-10"), y = 2.74, size = 4, colour = "gray60")
+graph
+```
+
+```{r}
+ggsave(
+    "C:/Users/italo/Downloads/graph.png",
+    plot = graph,
+    dpi = 1200,
+    width = ,
+    height = )
 ```
 
 
@@ -125,4 +148,8 @@ ggsave(
     dpi = 1200,
     width = 16,
     height = 9)
+```
+
+```{r}
+((2.56-2.72) / 2.72) *100
 ```
