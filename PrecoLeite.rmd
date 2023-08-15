@@ -121,6 +121,6 @@ ggsave(
     "C:/Users/italo/OneDrive/Área de Trabalho/GitHub/leite/Images/preco_leite.png",
     plot = preco_leite,
     dpi = 1200,
-    width = 8,
-    height = 12)
+    width = 16,
+    height = 9)
 ```
