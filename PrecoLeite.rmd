@@ -30,7 +30,7 @@ setwd("C:/Users/italo/OneDrive/Área de Trabalho/VsCode/cepea/")
 ```
 
 ```{r}
-temp <- readr::read_csv("CepeaPrecoLeite.csv", 
+temp <- readr::read_csv("CepeaPrecoLeite.csv",
         skip = 3) |>
     janitor::clean_names("snake") |>
     dplyr::mutate(
@@ -82,13 +82,13 @@ Preço médio do período
 ```{r}
 temp |>
     dplyr::filter(estado == "BRASIL") |>
-    dplyr::arrange(desc(preco_medio)) |> #view()
+    dplyr::arrange(desc(preco_medio)) #|> view()
 ```
 
 
 ```{r}
 preco_leite <- temp |>
-    dplyr::filter( estado == "BRASIL") |> 
+    dplyr::filter( estado == "BRASIL") |>
     ggplot2::ggplot(aes(x = date, y = preco_medio, color = estado)) +
                 geom_line(color = "steelblue") +
                 geom_hline(yintercept = 1.13, lty = 3, color = "gray30") +
@@ -101,24 +101,19 @@ preco_leite <- temp |>
                 guides(fill = FALSE) +
                 scale_x_date(date_labels = "%m/%Y", date_breaks = "6 month") +
                 theme(axis.text.x = element_text(angle = 60)) +
-                annotate(
-                    "text", label = "Média do período - R$ 1,13",
-                        x = as.Date(
-                            "2005-08-01"), y = 1.2, size = 4, colour = "gray60") +
-                annotate(
-                    "text", label = "R$ 3,57 / jul-2022",
-                        x = as.Date(
-                            "2022-07-01"), y = 3.65, size = 4, colour = "#E46726") +
-                annotate(
-                    "text", label = "R$ 2,56 / jun-2023",
-                        x = as.Date(
-                            "2023-12-01"), y = 2.54, size = 4, colour = "gray30") +
-                annotate(
-                    "text", label = "R$ 2,90 / abr-2023",
-                        x = as.Date(
-                            "2023-12-01"), y = 2.95, size = 4, colour = "steelblue")
+                annotate("text", label = "Média do período - R$ 1,13",
+                    x = as.Date(
+                        "2005-08-01"), y = 1.2, size = 4, colour = "gray60") +
+                annotate("text", label = "R$ 3,57 / jul-2022",
+                    x = as.Date(
+                        "2022-07-01"), y = 3.65, size = 4, colour = "#E46726") +
+                annotate("text", label = "R$ 2,56 / jun-2023",
+                    x = as.Date(
+                        "2023-12-01"), y = 2.54, size = 4, colour = "gray30") +
+                annotate("text", label = "R$ 2,90 / abr-2023",
+                    x = as.Date(
+                        "2023-12-01"), y = 2.95, size = 4, colour = "steelblue")
 preco_leite
-#plotly::ggplotly(preco_leite)
 ```
 
 ```{r}
