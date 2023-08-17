@@ -21,7 +21,7 @@ library(tidyverse)
 
 ```{r}
 leite_temp <- sidrar::get_sidra(api =
-    "/t/1086/n3/all/v/282,283/p/all/c12716/allxt/c12529/allxt/d/v282%200,v283%200") |> # nolint: line_length_linter.
+    "/t/1086/n3/all/v/282,283/p/all/c12716/allxt/c12529/allxt/d/v282%200,v283%200") |> 
     janitor::clean_names("snake") |>
     dplyr::glimpse()
 ```
@@ -57,5 +57,5 @@ leite |>
 ```
 
 ```{r}
-x <- lubridate::ymd(199701)
+
 ```
